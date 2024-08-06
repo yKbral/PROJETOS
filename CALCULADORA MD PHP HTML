@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Média</title>
+</head>
+<body>
+    <h1>Calculadora de Média</h1>
+    <form action="calcular_media.php" method="post">
+        <label for="nome">Nome do Aluno:</label>
+        <input type="text" name="nome" id="nome" required>
+        <br>
+        <label for="nota1">Nota 1:</label>
+        <input type="text" name="nota1" id="nota1" required>
+        <br>
+        <label for="nota2">Nota 2:</label>
+        <input type="text" name="nota2" id="nota2" required>
+        <br>
+        <input type="submit" value="Calcular Média">
+    </form>
+    <h1>Resultado da Média</h1>
+
+    <?php
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $nome = $_POST["nome"];
+        $nota1 = floatval($_POST["nota1"]);
+        $nota2 = floatval($_POST["nota2"]);
+
+        // Calcular a média aritmética
+        $media = ($nota1 + $nota2) / 2;
+
+        echo "<p>Aluno: $nome</p>";
+        echo "<p>Média: " . number_format($media, 2) . "</p>";
+
+        // Definir a situação do aluno
+        if ($media < 5.0) {
+            echo "<p>Situação: Reprovado</p>";
+        } elseif ($media < 7.0) {
+            echo "<p>Situação: Recuperação</p>";
+        } else {
+            echo "<p>Situação: Aprovado</p>";
+        }
+    }
+    ?>
+
+    <p><a href="form_notas.php">Voltar ao formulário</a></p>
+</body>
+</html>
