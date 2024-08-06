@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de IMC</title>
+</head>
+<body>
+    <h1>Calculadora de IMC</h1>
+    <form action="calcular_imc.php" method="post">
+        <label for="peso">Peso (kg):</label>
+        <input type="text" name="peso" id="peso" required>
+        <br>
+        <label for="altura">Altura (m):</label>
+        <input type="text" name="altura" id="altura" required>
+        <br>
+        <input type="submit" value="Calcular IMC">
+    </form>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultado do IMC</title>
+</head>
+<body>
+    <h1>Resultado do IMC</h1>
+
+    <?php
+    // Função para substituir vírgulas por pontos
+    function formatarNumero($numero) {
+        return str_replace(',', '.', $numero);
+    }
+
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $peso = formatarNumero($_POST["peso"]);
+        $altura = formatarNumero($_POST["altura"]);
+
+        // Calcular o IMC
+        $imc = $peso / ($altura * $altura);
+
+        echo "<p>Seu IMC é: " . number_format($imc, 2) . "</p>";
+
+        // Determinar a situação conforme a tabela de IMC
+        if ($imc < 18.5) {
+            echo "<p>Situação: Abaixo do peso</p>";
+        } elseif ($imc < 24.9) {
+            echo "<p>Situação: Peso normal</p>";
+        } elseif ($imc < 29.9) {
+            echo "<p>Situação: Sobrepeso</p>";
+        } elseif ($imc < 34.9) {
+            echo "<p>Situação: Obesidade grau I</p>";
+        } elseif ($imc < 39.9) {
+            echo "<p>Situação: Obesidade grau II</p>";
+        } else {
+            echo "<p>Situação: Obesidade grau III</p>";
+        }
+    }
+    ?>
+
+    <p><a href="form_imc.php">Voltar ao formulário</a></p>
+</body>
+</html>
+
