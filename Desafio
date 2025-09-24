@@ -1,0 +1,55 @@
+package app;
+
+import app.desafio.GeradorDesafios;
+
+public class Main {
+    public static void main(String[] args) {
+        GeradorDesafios gerador = new GeradorDesafios();
+        
+        System.out.println("===== DESAFIO DO DIA =====");
+        System.out.println(gerador.sortearDesafio());
+    }
+}
+//////
+package app.desafio;
+
+public class Desafio {
+    private String tipo;
+    private String descricao;
+
+    public Desafio(String tipo, String descricao) {
+        this.tipo = tipo;
+        this.descricao = descricao;
+    }
+
+    @Override
+    public String toString() {
+        return "[" + tipo + "] " + descricao;
+    }
+}
+//////
+package app.desafio;
+
+import java.util.Random;
+
+public class GeradorDesafios {
+    private Desafio[] desafios;
+    private Random random;
+
+    public GeradorDesafios() {
+        desafios = new Desafio[] {
+            new Desafio("Exercício", "Faça 20 flexões"),
+            new Desafio("Exercício", "Caminhe por 15 minutos"),
+            new Desafio("Estudo", "Leia 5 páginas de um livro"),
+            new Desafio("Estudo", "Resolva 3 exercícios de programação"),
+            new Desafio("Lazer", "Assista um episódio de uma série nova"),
+            new Desafio("Lazer", "Ouça uma música que nunca ouviu antes")
+        };
+        random = new Random();
+    }
+
+    public Desafio sortearDesafio() {
+        int index = random.nextInt(desafios.length);
+        return desafios[index];
+    }
+}
