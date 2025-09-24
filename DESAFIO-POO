@@ -1,0 +1,51 @@
+import java.util.Random;
+import java.util.Scanner;
+
+class Desafio {
+    private String tipo;
+    private String descricao;
+
+    public Desafio(String tipo, String descricao) {
+        this.tipo = tipo;
+        this.descricao = descricao;
+    }
+
+    @Override
+    public String toString() {
+        return "[" + tipo + "] " + descricao;
+    }
+}
+
+public class GeradorDeDesafios {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Random random = new Random();
+
+        Desafio[] desafios = {
+            new Desafio("Exercício", "Faça 20 flexões"),
+            new Desafio("Exercício", "Caminhe por 15 minutos"),
+            new Desafio("Estudo", "Leia 5 páginas de um livro"),
+            new Desafio("Estudo", "Resolva 3 exercícios de programação"),
+            new Desafio("Lazer", "Assista um episódio de uma série nova"),
+            new Desafio("Lazer", "Ouça uma música que nunca ouviu antes")
+        };
+
+        int opcao;
+        do {
+            System.out.println("\n===== GERADOR DE DESAFIOS =====");
+            System.out.println("1 - Gerar desafio");
+            System.out.println("0 - Sair");
+            System.out.print("Escolha: ");
+            opcao = scanner.nextInt();
+
+            if (opcao == 1) {
+                int index = random.nextInt(desafios.length);
+                System.out.println("\nSeu desafio do dia é:");
+                System.out.println(desafios[index]);
+            }
+        } while (opcao != 0);
+
+        System.out.println("Até mais! Continue se desafiando! 💪");
+        scanner.close();
+    }
+}
